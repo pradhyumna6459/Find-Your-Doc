@@ -49,6 +49,27 @@ app.post('/register',function(req,res){
     res.redirect("/login");
 
 });
+app.post('/login',function(req,res){
+    User.find({email:req.body.username},function(err,result)
+    {
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        {
+            if(req.body.password === result[0].password)
+            {
+                res.redirect('/');
+            }
+            else{
+                res.redirect("/register");
+            }
+        }
+
+    });
+
+});
 
 
 app.post('/aboutus',function(req,res){
