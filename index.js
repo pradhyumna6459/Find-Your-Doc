@@ -4,7 +4,9 @@ const ejs=require("ejs");
 const app=express();
 const mongoose=require('mongoose');
 const dir=__dirname;
-const sendmail = require('sendmail')();
+const nodemailer = require("nodemailer");
+const { text } = require("body-parser");
+require('dotenv').config();
 var username="";
 app.set('view engine','ejs');
 app.use(bodyParser.urlencoded({
@@ -101,18 +103,33 @@ app.post('/showdoctorbook',function(req,res)
 });
 app.post("/finalemailsend",function(req,res)
 {
-    sendmail({
-        from: req.body.email,
-        to: req.body.doctoremail,
-        subject: "Appointment for treatment data"+req.body.date+"time"+req.body.time,
-
-        html: 'Problem'+req.body.problem+"Message to doctor"+req.body.message
-      }, function(err, reply) {
-        console.log(err && err.stack);
-        console.dir(reply);
-    });
-    res.render("thankyou");
-
+    var test='Name:'+req.body.name+"\n"+"Problem:"+req.body.problem+'\n'+"date:"+req.body.data+'\n'+"time:"+req.body.time+'\n'+"Message:"+req.body.message;
+    var ans=req.body.sendemail;
+    console.log(test);
+    console.log(ans);
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.EMAILID,
+          pass: process.env.PASSWORD
+        }
+      });
+      
+      var mailOptions = {
+        from: process.env.EMAILID,
+        to: ans,
+        subject: 'Mail from Find you doctor Web Applications',
+        text: text      
+      };
+      
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(info);
+          res.render("thankyou");
+        }
+      });
     
 });
 
