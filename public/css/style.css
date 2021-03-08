@@ -52,6 +52,10 @@ p{
     padding: 5%;
 
 }
+#afterloginheading{
+    padding: 10%;
+    padding-bottom: 0%;
+}
 /* about -us */
 #about-us{
     padding: 10%;
@@ -113,4 +117,21 @@ footer{
 .book-img{
     height: 75%;
     width: 75%
+}
+/* show doctor */
+#showdoctor{
+    padding: 10%;
+}
+/* finalbookof doctor */
+#finalbook{
+    padding: 10%;
+    background-image: url("https://www.solidbackgrounds.com/images/website/950x534/950x534-blue-abstract-noise-free-website-background-image.jpg");
+    height: 100%;
+
+}
+label.a{
+    color: aliceblue;
+}
+.finalbookclass{
+    padding: 3%;
 }
