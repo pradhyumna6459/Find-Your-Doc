@@ -105,8 +105,6 @@ app.post("/finalemailsend",function(req,res)
 {
     var test='Name:'+req.body.name+"\n"+"Problem:"+req.body.problem+'\n'+"date:"+req.body.data+'\n'+"time:"+req.body.time+'\n'+"Message:"+req.body.message;
     var ans=req.body.sendemail;
-    console.log(test);
-    console.log(ans);
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -119,7 +117,7 @@ app.post("/finalemailsend",function(req,res)
         from: process.env.EMAILID,
         to: ans,
         subject: 'Mail from Find you doctor Web Applications',
-        text: text      
+        text: test      
       };
       
       transporter.sendMail(mailOptions, function(error, info){
